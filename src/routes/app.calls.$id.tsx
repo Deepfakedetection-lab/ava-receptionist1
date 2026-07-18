@@ -24,7 +24,7 @@ export const Route = createFileRoute("/app/calls/$id")({
 });
 
 function CallDetail() {
-  const { call } = Route.useLoaderData();
+  const { call } = Route.useLoaderData() as { call: Call };
 
   return (
     <div className="mx-auto max-w-7xl space-y-6 p-4 sm:p-6">
