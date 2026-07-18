@@ -13,6 +13,13 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppIndexRouteImport } from './routes/app.index'
+import { Route as AppSettingsRouteImport } from './routes/app.settings'
+import { Route as AppKnowledgeRouteImport } from './routes/app.knowledge'
+import { Route as AppContactsRouteImport } from './routes/app.contacts'
+import { Route as AppAppointmentsRouteImport } from './routes/app.appointments'
+import { Route as AppAdminRouteImport } from './routes/app.admin'
+import { Route as AppCallsIndexRouteImport } from './routes/app.calls.index'
+import { Route as AppCallsIdRouteImport } from './routes/app.calls.$id'
 
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
@@ -34,31 +41,120 @@ const AppIndexRoute = AppIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AppRoute,
 } as any)
+const AppSettingsRoute = AppSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppKnowledgeRoute = AppKnowledgeRouteImport.update({
+  id: '/knowledge',
+  path: '/knowledge',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppContactsRoute = AppContactsRouteImport.update({
+  id: '/contacts',
+  path: '/contacts',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAppointmentsRoute = AppAppointmentsRouteImport.update({
+  id: '/appointments',
+  path: '/appointments',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAdminRoute = AppAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCallsIndexRoute = AppCallsIndexRouteImport.update({
+  id: '/calls/',
+  path: '/calls/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCallsIdRoute = AppCallsIdRouteImport.update({
+  id: '/calls/$id',
+  path: '/calls/$id',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
   '/auth': typeof AuthRoute
+  '/app/admin': typeof AppAdminRoute
+  '/app/appointments': typeof AppAppointmentsRoute
+  '/app/contacts': typeof AppContactsRoute
+  '/app/knowledge': typeof AppKnowledgeRoute
+  '/app/settings': typeof AppSettingsRoute
   '/app/': typeof AppIndexRoute
+  '/app/calls/$id': typeof AppCallsIdRoute
+  '/app/calls/': typeof AppCallsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/app/admin': typeof AppAdminRoute
+  '/app/appointments': typeof AppAppointmentsRoute
+  '/app/contacts': typeof AppContactsRoute
+  '/app/knowledge': typeof AppKnowledgeRoute
+  '/app/settings': typeof AppSettingsRoute
   '/app': typeof AppIndexRoute
+  '/app/calls/$id': typeof AppCallsIdRoute
+  '/app/calls': typeof AppCallsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
   '/auth': typeof AuthRoute
+  '/app/admin': typeof AppAdminRoute
+  '/app/appointments': typeof AppAppointmentsRoute
+  '/app/contacts': typeof AppContactsRoute
+  '/app/knowledge': typeof AppKnowledgeRoute
+  '/app/settings': typeof AppSettingsRoute
   '/app/': typeof AppIndexRoute
+  '/app/calls/$id': typeof AppCallsIdRoute
+  '/app/calls/': typeof AppCallsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/app' | '/auth' | '/app/'
+  fullPaths:
+    | '/'
+    | '/app'
+    | '/auth'
+    | '/app/admin'
+    | '/app/appointments'
+    | '/app/contacts'
+    | '/app/knowledge'
+    | '/app/settings'
+    | '/app/'
+    | '/app/calls/$id'
+    | '/app/calls/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/app'
-  id: '__root__' | '/' | '/app' | '/auth' | '/app/'
+  to:
+    | '/'
+    | '/auth'
+    | '/app/admin'
+    | '/app/appointments'
+    | '/app/contacts'
+    | '/app/knowledge'
+    | '/app/settings'
+    | '/app'
+    | '/app/calls/$id'
+    | '/app/calls'
+  id:
+    | '__root__'
+    | '/'
+    | '/app'
+    | '/auth'
+    | '/app/admin'
+    | '/app/appointments'
+    | '/app/contacts'
+    | '/app/knowledge'
+    | '/app/settings'
+    | '/app/'
+    | '/app/calls/$id'
+    | '/app/calls/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -97,15 +193,78 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppIndexRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/settings': {
+      id: '/app/settings'
+      path: '/settings'
+      fullPath: '/app/settings'
+      preLoaderRoute: typeof AppSettingsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/knowledge': {
+      id: '/app/knowledge'
+      path: '/knowledge'
+      fullPath: '/app/knowledge'
+      preLoaderRoute: typeof AppKnowledgeRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/contacts': {
+      id: '/app/contacts'
+      path: '/contacts'
+      fullPath: '/app/contacts'
+      preLoaderRoute: typeof AppContactsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/appointments': {
+      id: '/app/appointments'
+      path: '/appointments'
+      fullPath: '/app/appointments'
+      preLoaderRoute: typeof AppAppointmentsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/admin': {
+      id: '/app/admin'
+      path: '/admin'
+      fullPath: '/app/admin'
+      preLoaderRoute: typeof AppAdminRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/calls/': {
+      id: '/app/calls/'
+      path: '/calls'
+      fullPath: '/app/calls/'
+      preLoaderRoute: typeof AppCallsIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/calls/$id': {
+      id: '/app/calls/$id'
+      path: '/calls/$id'
+      fullPath: '/app/calls/$id'
+      preLoaderRoute: typeof AppCallsIdRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
 interface AppRouteChildren {
+  AppAdminRoute: typeof AppAdminRoute
+  AppAppointmentsRoute: typeof AppAppointmentsRoute
+  AppContactsRoute: typeof AppContactsRoute
+  AppKnowledgeRoute: typeof AppKnowledgeRoute
+  AppSettingsRoute: typeof AppSettingsRoute
   AppIndexRoute: typeof AppIndexRoute
+  AppCallsIdRoute: typeof AppCallsIdRoute
+  AppCallsIndexRoute: typeof AppCallsIndexRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppAdminRoute: AppAdminRoute,
+  AppAppointmentsRoute: AppAppointmentsRoute,
+  AppContactsRoute: AppContactsRoute,
+  AppKnowledgeRoute: AppKnowledgeRoute,
+  AppSettingsRoute: AppSettingsRoute,
   AppIndexRoute: AppIndexRoute,
+  AppCallsIdRoute: AppCallsIdRoute,
+  AppCallsIndexRoute: AppCallsIndexRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)

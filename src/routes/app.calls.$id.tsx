@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, PhoneCall, Sparkles, Download, Send, Copy, User, Bot } from "lucide-react";
-import { calls, formatDuration } from "@/lib/mock-data";
+import { calls, formatDuration, type Call } from "@/lib/mock-data";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -16,7 +16,7 @@ export const Route = createFileRoute("/app/calls/$id")({
       Call not found. <Link to="/app/calls" className="text-primary underline">Back to calls</Link>
     </div>
   ),
-  loader: ({ params }) => {
+  loader: ({ params }): { call: Call } => {
     const call = calls.find((c) => c.id === params.id);
     if (!call) throw notFound();
     return { call };
