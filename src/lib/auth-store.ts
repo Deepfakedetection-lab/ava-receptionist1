@@ -58,7 +58,10 @@ export function useSession(): { session: Session | null; hydrated: boolean } {
   useEffect(() => {
     setSession(read());
     setHydrated(true);
-    return auth.subscribe(setSession);
+    const unsub = auth.subscribe(setSession);
+    return () => {
+      unsub();
+    };
   }, []);
   return { session, hydrated };
 }
